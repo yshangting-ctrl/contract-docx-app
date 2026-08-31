@@ -1,0 +1,544 @@
+.qr-auth-page {
+  min-width: 0;
+  padding: 28px clamp(18px, 4vw, 52px) 48px;
+}
+
+.qr-auth-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.qr-auth-header h1 {
+  font-size: clamp(26px, 3.6vw, 38px);
+}
+
+.qr-loading,
+.qr-empty {
+  min-height: 240px;
+  display: grid;
+  place-items: center;
+  color: #667985;
+  background: #fff;
+  border: 1px solid #d6e0e5;
+  border-radius: 8px;
+}
+
+.qr-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  z-index: 1000;
+  transform: translateX(-50%);
+  padding: 12px 18px;
+  color: #fff;
+  background: #172026;
+  border-radius: 8px;
+  box-shadow: 0 12px 26px rgba(23, 32, 38, 0.2);
+}
+
+.qr-telecom-auth-card,
+.qr-mobile-auth-card,
+.qr-unicom-auth-card {
+  width: min(100%, 980px);
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(23, 32, 38, 0.08);
+}
+
+.qr-broadnet-auth-card {
+  width: min(100%, 980px);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #b7b7b7;
+}
+
+.qr-telecom-auth-top,
+.qr-mobile-auth-top,
+.qr-unicom-auth-top {
+  background: #fff;
+}
+
+.qr-telecom-auth-logo,
+.qr-mobile-auth-logo,
+.qr-unicom-auth-logo {
+  display: block;
+  width: 100%;
+  object-fit: contain;
+}
+
+.qr-telecom-auth-logo {
+  aspect-ratio: 2156 / 901;
+}
+
+.qr-mobile-auth-logo {
+  aspect-ratio: 3320 / 1286;
+}
+
+.qr-unicom-auth-logo {
+  aspect-ratio: 2352 / 931;
+}
+
+.qr-telecom-auth-body {
+  width: 100%;
+  aspect-ratio: 2156 / 1213;
+  padding: 7.8% 8.6% 0;
+  display: grid;
+  grid-template-columns: 64% 23%;
+  column-gap: 7%;
+  align-items: start;
+  background: #fff;
+  color: #222;
+}
+
+.qr-telecom-auth-info {
+  min-width: 0;
+  padding-top: 4%;
+}
+
+.qr-telecom-auth-info p {
+  margin: 0;
+}
+
+.qr-telecom-auth-type {
+  margin-bottom: 5.6% !important;
+  color: #050505;
+  font-size: clamp(24px, 3.45vw, 40px);
+  font-weight: 800;
+}
+
+.qr-telecom-auth-company {
+  margin-bottom: 5.6% !important;
+  color: #2b2b2b;
+  font-size: min(var(--qr-telecom-company-font-size, 49px), clamp(30px, 4.18vw, 49px));
+  font-weight: 600;
+  line-height: 1.08;
+  white-space: nowrap;
+}
+
+.qr-telecom-auth-no {
+  color: #474747;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: clamp(26px, 3.85vw, 45px);
+  font-weight: 700;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.qr-telecom-auth-url {
+  max-width: 100%;
+  margin-top: 4.8% !important;
+  color: #474747;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: clamp(13px, 1.55vw, 19px);
+  font-weight: 700;
+  line-height: 1.35;
+  word-break: break-all;
+}
+
+.qr-telecom-auth-qr {
+  padding-top: 3.2%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.qr-telecom-qr-upload {
+  position: relative;
+  width: clamp(168px, 21vw, 248px);
+  height: clamp(168px, 21vw, 248px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #0052a5;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+}
+
+.qr-telecom-qr-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 21%;
+  height: 21%;
+  background: #fff;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.qr-mobile-auth-band {
+  width: 100%;
+  aspect-ratio: 3320 / 922;
+  padding: 0 4.5%;
+  display: grid;
+  grid-template-columns: 36% 44% 13%;
+  align-items: center;
+  gap: 2%;
+  color: #fff;
+  background: #078bd0;
+}
+
+.qr-mobile-auth-title {
+  align-self: end;
+  padding-bottom: 28%;
+  font-size: clamp(38px, 5vw, 59px);
+  line-height: 1;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.qr-mobile-auth-info {
+  min-width: 0;
+  align-self: end;
+  padding-bottom: 14%;
+  transform: translateX(-7%);
+  font-size: clamp(15px, 1.65vw, 20px);
+  line-height: 1.62;
+  font-weight: 500;
+  text-align: left;
+}
+
+.qr-mobile-auth-info p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.qr-mobile-auth-qr {
+  align-self: end;
+  padding-bottom: 7%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.qr-upload,
+.qr-unicom-qr-upload,
+.qr-broadnet-qr-upload,
+.qr-telecom-qr-upload {
+  position: relative;
+}
+
+.qr-upload {
+  width: clamp(108px, 12vw, 150px);
+  height: clamp(108px, 12vw, 150px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 10px solid #fff;
+  background: #fff;
+  color: #078bd0;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+}
+
+.qr-upload-text {
+  line-height: 1.5;
+}
+
+.qr-upload input,
+.qr-unicom-qr-upload input,
+.qr-broadnet-qr-upload input,
+.qr-telecom-qr-upload input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.qr-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.qr-caption {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 13px;
+}
+
+.qr-unicom-auth-band {
+  width: 100%;
+  aspect-ratio: 2352 / 781;
+  padding: 0 3.6%;
+  display: grid;
+  grid-template-columns: 27% 50% 19%;
+  align-items: end;
+  gap: 2%;
+  color: #fff;
+  background: #ff3b06;
+}
+
+.qr-unicom-auth-title {
+  align-self: end;
+  padding-bottom: 34%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9em;
+  font-size: clamp(32px, 3.55vw, 43px);
+  line-height: 1;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.qr-unicom-auth-info {
+  align-self: end;
+  min-width: 0;
+  padding-bottom: 15%;
+  font-family: "SimSun", "Songti SC", serif;
+  font-size: clamp(17px, 2.05vw, 24px);
+  line-height: 1.72;
+  font-weight: 500;
+  text-align: left;
+}
+
+.qr-unicom-auth-info p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.qr-unicom-auth-qr {
+  align-self: end;
+  padding-bottom: 34%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qr-unicom-qr-upload {
+  width: clamp(132px, 15vw, 176px);
+  height: clamp(132px, 15vw, 176px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 10px solid #fff;
+  background: #fff;
+  color: #ff3b06;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+}
+
+.qr-broadnet-auth-layout {
+  width: 100%;
+  aspect-ratio: 5040 / 2200;
+  position: relative;
+  container-type: inline-size;
+  color: #111;
+  background: #fff;
+}
+
+.qr-broadnet-auth-qr {
+  position: absolute;
+  left: 17.8%;
+  top: 22.1%;
+  width: 25.2%;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qr-broadnet-qr-upload {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.45cqw;
+  border: 0.62cqw solid #0872a6;
+  background: #fff;
+  color: #0872a6;
+  font-size: 1.4cqw;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+}
+
+.qr-broadnet-logo-crop {
+  position: absolute;
+  left: 46.8%;
+  top: 19.5%;
+  width: 27.1%;
+  aspect-ratio: 2818 / 1014;
+}
+
+.qr-broadnet-auth-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.qr-broadnet-auth-info {
+  position: absolute;
+  left: 46.8%;
+  top: 44.2%;
+  width: 41.5%;
+  text-align: left;
+}
+
+.qr-broadnet-auth-info p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.qr-broadnet-auth-type {
+  margin-bottom: 2.05cqw !important;
+  font-size: 2.78cqw;
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.qr-broadnet-auth-company {
+  margin-bottom: 1.55cqw !important;
+  max-width: 100%;
+  font-size: min(var(--qr-broadnet-company-font-size, 3.02cqw), 3.02cqw);
+  font-weight: 600;
+  line-height: 1.08;
+}
+
+.qr-broadnet-auth-no {
+  margin-bottom: 0.85cqw !important;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 2.72cqw;
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.qr-broadnet-auth-extra {
+  font-size: 2.08cqw;
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.qr-edit-panel {
+  width: min(100%, 980px);
+  margin-top: 16px;
+  padding: 18px;
+  display: grid;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid #d6e0e5;
+  border-radius: 8px;
+}
+
+.qr-edit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.qr-edit-grid-four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.qr-edit-grid label {
+  display: grid;
+  gap: 7px;
+  color: #4f626d;
+  font-size: 14px;
+}
+
+.qr-edit-grid input {
+  height: 42px;
+  border: 1px solid #cbd7dd;
+  border-radius: 8px;
+  background: #fbfdfe;
+}
+
+.qr-panel-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.qr-primary-button,
+.qr-secondary-button {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 8px;
+  padding: 0 14px;
+  font-weight: 700;
+}
+
+.qr-primary-button {
+  border: 0;
+  color: #fff;
+  background: #2374a7;
+}
+
+.qr-secondary-button {
+  border: 1px solid #cbd7dd;
+  color: #1f648d;
+  background: #fff;
+}
+
+.qr-primary-button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+@media (max-width: 1100px) {
+  .qr-edit-grid-four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .qr-auth-page {
+    padding: 20px 14px;
+  }
+
+  .qr-auth-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .qr-telecom-auth-body,
+  .qr-mobile-auth-band,
+  .qr-unicom-auth-band {
+    aspect-ratio: auto;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 28px 22px;
+  }
+
+  .qr-mobile-auth-title,
+  .qr-unicom-auth-title {
+    padding-bottom: 0;
+    white-space: normal;
+  }
+
+  .qr-mobile-auth-info,
+  .qr-unicom-auth-info,
+  .qr-mobile-auth-qr,
+  .qr-unicom-auth-qr {
+    padding-bottom: 0;
+  }
+
+  .qr-mobile-auth-info p,
+  .qr-unicom-auth-info p {
+    white-space: normal;
+  }
+
+  .qr-edit-grid,
+  .qr-edit-grid-four {
+    grid-template-columns: 1fr;
+  }
+}
