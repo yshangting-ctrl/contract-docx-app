@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ClipboardPaste, Copy, Database, Download, FileCheck2, Loader2, RefreshCw, RotateCcw } from "lucide-react";
+import { CalendarDays, ClipboardPaste, Copy, Database, Download, FileCheck2, Loader2, RefreshCw, RotateCcw } from "lucide-react";
 import unicomLogo from "./assets/ltong.png";
 import "./emailScreenshot.css";
 
@@ -64,7 +64,6 @@ const defaultTelecomEmailForm = {
   platformName: "拼多多",
   companyName: "揭阳市恩诺达科技有限公司",
   shopName: "恩诺达通信专营店",
-  shopId: "979078584",
   authorizationType: "电信授权",
   accountEmail: "18905454754.sd@chinatelecom.cn",
   senderName: "曾旺玉",
@@ -106,6 +105,91 @@ function formatMobileSentAt(date = new Date()) {
 
 function formatTelecomSentAt(date = new Date()) {
   return `${date.getFullYear()}/${padDatePart(date.getMonth() + 1)}/${padDatePart(date.getDate())} ${padDatePart(date.getHours())}:${padDatePart(date.getMinutes())}:${padDatePart(date.getSeconds())} ${fullWeekdays[date.getDay()]}`;
+}
+
+function parseSentAt(value) {
+  const match = String(value || "").match(
+    /(\d{4})[年/-](\d{1,2})[月/-](\d{1,2})日?(?:\s+\([^)]*\))?\s+(\d{1,2}):(\d{2})(?::(\d{2}))?/
+  );
+
+  if (!match) {
+    return null;
+  }
+
+  const [, year, month, day, hour, minute, second = "0"] = match;
+  const date = new Date(
+    Number(year),
+    Number(month) - 1,
+    Number(day),
+    Number(hour),
+    Number(minute),
+    Number(second)
+  );
+
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function formatDateTimeLocalValue(date, includeSeconds) {
+  const datePart = `${date.getFullYear()}-${padDatePart(date.getMonth() + 1)}-${padDatePart(date.getDate())}`;
+  const timePart = `${padDatePart(date.getHours())}:${padDatePart(date.getMinutes())}`;
+
+  return `${datePart}T${timePart}${includeSeconds ? `:${padDatePart(date.getSeconds())}` : ""}`;
+}
+
+function SentAtPicker({ value, onChange, formatValue, includeSeconds = false }) {
+  const pickerRef = useRef(null);
+  const selectedDate = parseSentAt(value) || new Date();
+
+  function openPicker() {
+    const picker = pickerRef.current;
+
+    if (!picker) {
+      return;
+    }
+
+    if (typeof picker.showPicker === "function") {
+      picker.showPicker();
+      return;
+    }
+
+    picker.focus();
+    picker.click();
+  }
+
+  function handleChange(event) {
+    if (!event.target.value) {
+      return;
+    }
+
+    const nextDate = new Date(event.target.value);
+    if (!Number.isNaN(nextDate.getTime())) {
+      onChange(formatValue(nextDate));
+    }
+  }
+
+  return (
+    <div className="sent-at-picker">
+      <button
+        type="button"
+        className="sent-at-picker-button"
+        onClick={openPicker}
+        aria-label={`选择发送时间，当前为 ${value}`}
+      >
+        <span>{value}</span>
+        <CalendarDays size={17} aria-hidden="true" />
+      </button>
+      <input
+        ref={pickerRef}
+        className="sent-at-picker-native"
+        type="datetime-local"
+        step={includeSeconds ? 1 : 60}
+        value={formatDateTimeLocalValue(selectedDate, includeSeconds)}
+        onChange={handleChange}
+        aria-label="选择发送日期和时间"
+        tabIndex={-1}
+      />
+    </div>
+  );
 }
 
 function createDefaultUnicomEmailForm() {
@@ -316,7 +400,6 @@ function buildTelecomBody(form) {
     "兹证明，我司允许本公司合作商家：",
     `商家主体公司名称：${form.companyName}`,
     `${form.platformName}店铺名称：${form.shopName}`,
-    `${form.platformName}店铺 ID：${form.shopId}`,
     `在${form.platformName}平台销售本公司授权的 ${form.products}，并允许商家为${form.platformName}用户办理固定电话装机、移机、过户，移动电话开户、过户等，并要求商家收集的用户身份信息仅限办理我司新入网手续，不得挪作他用或泄露。`,
     "请贵平台知悉。"
   ];
@@ -637,7 +720,11 @@ function MobileEmailScreenshotPage() {
           </div>
           <div className="field">
             <label>发送时间</label>
-            <input value={form.sentAt} onChange={(event) => updateField("sentAt", event.target.value)} />
+            <SentAtPicker
+              value={form.sentAt}
+              onChange={(value) => updateField("sentAt", value)}
+              formatValue={formatMobileSentAt}
+            />
           </div>
           <div className="field">
             <label>邮件大小</label>
@@ -848,10 +935,6 @@ function TelecomEmailScreenshotPage() {
             <input value={form.shopName} onChange={(event) => updateField("shopName", event.target.value)} />
           </div>
           <div className="field">
-            <label>店铺 ID</label>
-            <input value={form.shopId} onChange={(event) => updateField("shopId", event.target.value)} />
-          </div>
-          <div className="field">
             <label>平台名称</label>
             <input value={form.platformName} onChange={(event) => updateField("platformName", event.target.value)} />
           </div>
@@ -868,7 +951,12 @@ function TelecomEmailScreenshotPage() {
           </div>
           <div className="field">
             <label>发送时间</label>
-            <input value={form.sentAt} onChange={(event) => updateField("sentAt", event.target.value)} />
+            <SentAtPicker
+              value={form.sentAt}
+              onChange={(value) => updateField("sentAt", value)}
+              formatValue={formatTelecomSentAt}
+              includeSeconds
+            />
           </div>
           <div className="field">
             <label>签名公司</label>
@@ -1066,7 +1154,11 @@ function UnicomEmailScreenshotPage() {
           </div>
           <div className="field">
             <label>发送时间</label>
-            <input value={form.sentAt} onChange={(event) => updateField("sentAt", event.target.value)} />
+            <SentAtPicker
+              value={form.sentAt}
+              onChange={(value) => updateField("sentAt", value)}
+              formatValue={formatUnicomSentAt}
+            />
           </div>
           <div className="field">
             <label>发件邮箱</label>

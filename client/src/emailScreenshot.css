@@ -51,6 +51,60 @@
   min-height: 76px;
 }
 
+.sent-at-picker {
+  position: relative;
+}
+
+.sent-at-picker-button {
+  width: 100%;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 12px;
+  border: 1px solid #cbd7dd;
+  border-radius: 8px;
+  color: #172026;
+  background: #fbfdfe;
+  text-align: left;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.field .sent-at-picker-button span {
+  min-width: 0;
+  overflow: hidden;
+  color: #172026;
+  font-size: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sent-at-picker-button svg {
+  flex: 0 0 auto;
+  color: #2374a7;
+}
+
+.sent-at-picker-button:hover,
+.sent-at-picker-button:focus-visible {
+  border-color: #2374a7;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(35, 116, 167, 0.14);
+  outline: none;
+}
+
+.sent-at-picker-native {
+  position: absolute;
+  right: 8px;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .email-screenshot-record-panel .email-record-list {
   max-height: none;
   overflow: visible;
